@@ -1,7 +1,7 @@
 node_demos by rudifa
 ====================
 
-Three demo projects based on the tutorial at http://www.nodebeginner.org/
+The first three demo projects are based on the tutorial at http://www.nodebeginner.org/
 
 **server1.js** is a minimal node server just serving a hello-world static page
 
@@ -13,4 +13,5 @@ and serving a picture file (harcoded)
 parsing the request with module formidable, uploading and displaying the uploaded file
 Precondition : npm install formidable
 
+**server4.js** demonstrates posting contents on an input text field and getting it back into the js code via page update
 
