@@ -1,4 +1,4 @@
-// server2-router.js
+// router2.js
 // based on http://www.nodebeginner.org/
 
 function route(handle, pathname, response, postData) {

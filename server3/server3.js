@@ -1,4 +1,4 @@
-// server-3.js
+// server3.js
 // based on http://www.nodebeginner.org/
 
 var http = require("http"),

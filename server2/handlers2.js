@@ -1,4 +1,4 @@
-// server2-handlers.js
+// handlers2.js
 // based on http://www.nodebeginner.org/
 
 var querystring = require("querystring"),

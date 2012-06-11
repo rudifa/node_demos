@@ -1,4 +1,4 @@
-// server-1-hello.js
+// server1.js
 // from http://www.nodebeginner.org/
 // touched up by rudifa
 
