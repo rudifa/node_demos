@@ -1,0 +1,5 @@
+It makes sense to have the timeout shorter than the repetition period, e.g. 5 s vs 10 s.
+
+It seems that the query hangs when there are no new tweets since the last time.
+
+Try a longer rep period 
