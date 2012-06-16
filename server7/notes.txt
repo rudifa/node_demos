@@ -3,3 +3,17 @@ It makes sense to have the timeout shorter than the repetition period, e.g. 5 s 
 It seems that the query hangs when there are no new tweets since the last time.
 
 Try a longer rep period 
+
+
+var Twitter contains 
+    {
+        EventEmitter : eventEmitter,  // The event broadcaster
+        latestTweet : 0               // The ID of the latest searched tweet		
+    };
+    
+    
+since_id=0 did not seem to work even in the browser
+
+Could get latest N tweets, then work backwards using max_id
+
+Should accumulate tweets in the server

@@ -81,9 +81,10 @@ function get_tweets(query) {
 		host: "api.twitter.com",
 		port: 80,
 		method: "GET",
-		path: "/1/statuses/user_timeline.json?screen_name=rudifa&count=2"
-		
+		//path: "/1/statuses/user_timeline.json?screen_name=rudifa&count=3" + "&since_id=" + Twitter.latestTweet // not working
+		path: "/1/statuses/user_timeline.json?screen_name=rudifa&count=5"		
 	};
+	
 	// Send a search request to Twitter
 	var request = http.request(options)
 	
@@ -114,6 +115,7 @@ function get_tweets(query) {
 				 */
 				var tweets = JSON.parse(body);
 				
+			    console.log('tweets=', tweets);
 			    //console.log('tweets.length=', tweets.length);
 				
 				/*
@@ -121,19 +123,22 @@ function get_tweets(query) {
 				 * have a valid structure.
 				 */
 				if (tweets.length > 0) {
-					/*
-					 * We actually got some tweets, so set the Twitter.latestTweet 
-					 * value to the ID of the latest one in the collection.
-					 */ 
-					Twitter.latestTweet = tweets.max_id_str;
-
-					/*
-					 * Remember, node.js is an event based framework, so in order 
-					 * to get the tweets back to the client, we need to broadcast 
-					 * a custom event named 'tweets'. There's a function listening 
-					 * for this event in the createServer() function (see below).
-					 */ 
-					Twitter.EventEmitter.emit("tweets", tweets);
+				    var latestTweet = tweets[0]['id'];
+				    if (Twitter.latestTweet < latestTweet) {
+    					/*
+    					 * We actually got some tweets, so set the Twitter.latestTweet 
+    					 * value to the ID of the latest one in the collection.
+    					 */ 
+    					Twitter.latestTweet = latestTweet;
+    
+    					/*
+    					 * Remember, node.js is an event based framework, so in order 
+    					 * to get the tweets back to the client, we need to broadcast 
+    					 * a custom event named 'tweets'. There's a function listening 
+    					 * for this event in the createServer() function (see below).
+    					 */ 
+    					Twitter.EventEmitter.emit("tweets", tweets);
+				    }
 				}
 				
 				/*
