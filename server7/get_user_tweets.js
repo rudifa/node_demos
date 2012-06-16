@@ -76,14 +76,14 @@ var Twitter = (function(){
  * @param {Object} query
  */
 function get_tweets(query) {
-	
+		
 	var options = {
-		host: "search.twitter.com",
+		host: "api.twitter.com",
 		port: 80,
 		method: "GET",
-		path: "/search.json?since_id=" + Twitter.latestTweet + "result_type=recent&rpp=5&q=" + query
+		path: "/1/statuses/user_timeline.json?screen_name=rudifa&count=2"
+		
 	};
-	
 	// Send a search request to Twitter
 	var request = http.request(options)
 	
@@ -103,6 +103,8 @@ function get_tweets(query) {
 		response.on("data", function(data){
 			body += data;
 			
+			//console.log('body=', body);
+			
 			try {
 				/*
 				 * Since the Twitter Search API is streaming, we can't listen to 
@@ -112,11 +114,13 @@ function get_tweets(query) {
 				 */
 				var tweets = JSON.parse(body);
 				
+			    //console.log('tweets.length=', tweets.length);
+				
 				/*
 				 * The data was successfully parsed, so we can safely assume we 
 				 * have a valid structure.
 				 */
-				if (tweets.results.length > 0) {
+				if (tweets.length > 0) {
 					/*
 					 * We actually got some tweets, so set the Twitter.latestTweet 
 					 * value to the ID of the latest one in the collection.

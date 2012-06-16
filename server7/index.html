@@ -17,7 +17,7 @@
   </head>
  
   <body>
-  Here is your Twitter Search Feed...
+  Here is your Twitter Feed...
  
         <ul id="tweets"></ul>
         <script type="text/javascript">
@@ -28,10 +28,10 @@
             var keyword = "fun";
             //var keyword = "javascript";
             $.getJSON("/twitter?" + keyword, function(tweets) {
-                $.each(tweets.results, function() {
+                $.each(tweets, function() {
                     $("<li>").html(this.text).prependTo(tweet_list);
                 });
-                console.log("load_tweets <- " + tweets.results.length);
+                console.log("load_tweets <- " + tweets.length);
             });
         } 
  
