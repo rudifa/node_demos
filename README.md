@@ -15,8 +15,6 @@ Precondition : npm install formidable
 
 **server4** demonstrates posting text from an input text field and getting it back into the js code via page update
 
-**server5** by Devon Govett of tutsplus demonstrates getting twitter public timeline
-
-**server6** by Steve Brownlee of fusioncube demonstrates getting twitter search results (code derived from Govett's)
+**server7** demonstrates getting user's tweets via node.js http server
 
 
