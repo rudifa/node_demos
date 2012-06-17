@@ -24,38 +24,31 @@ function load_static_web_file(uri, response) {
 	console.log("load_static_web_file =" + uri + "=");
 	//console.log("load_static_web_file " + filename);
     
-	// If path.exists function takes a string parameter - which is a path to
-	// the document being requested - and a function which gets passed a boolean
-	// argument which is true if a file at the path exists, and false if it doesn't
+	// If file exists send it to the client
 	fs.exists(filename, function(exists) {
 		
-		// File not found. Return a 404 error.
         if (!exists) {
+            // File not found: return a 404 error.
             response.writeHead(404, {"Content-Type": "text/plain"});
-            response.write("Four Oh Four! Wherefour art thou?");
+            response.write("No such file " + uri);
             response.end();
             return;
         }
         
-		// File does exist. Execute the FileSystem.readFile() method
-		// with a closure that returns a 500 error if the file could not
-		// be read properly.
+		// File exists: read it.
         fs.readFile(filename, "binary", function(err, file) {
 			
-			// File could not be read, return a 500 error.
             if (err) {
+                // File read failed: return a 500 error.
                 response.writeHead(500, {"Content-Type": "text/plain"});
                 response.write(err+"\n");
                 response.end();
                 return;
             }
             
-			// File was found, and successfully read from the file system.
-			// Return a 200 header and the file as binary data.
+			// File was read: return a 200 header and the file as binary data.
             response.writeHead(200);
             response.write(file, "binary");
-			
-			// End the response.
             response.end();
         });
     });
