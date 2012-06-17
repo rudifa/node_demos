@@ -1,5 +1,5 @@
 <html>
-  <head>
+<head>
     <title>Node.js Twitter Search</title>
  
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
@@ -14,32 +14,47 @@
           margin: 2px;
       }
     </style>
-  </head>
- 
-  <body>
-  Here is your Twitter Feed...
- 
-        <ul id="tweets"></ul>
-        <script type="text/javascript">
-        var tweet_list = $("#tweets"); 
+    <script type="text/javascript">
+        //var tweet_list = $("#tweets"); 
  
         function load_tweets() {
+            <!-- get value from form -->
+            var username=document.forms['form1']['username'].value;
+            //alert('load_tweets() ' + username);
             console.log("load_tweets ->");
-            var keyword = "fun";
-            //var keyword = "javascript";
-            $.getJSON("/twitter?" + keyword, function(tweets) {
+             $.getJSON("/twitter?" + username, function(tweets) {
                 $.each(tweets, function() {
                     $("<li>").html(this.id + " " + this.text).appendTo(tweet_list);
                 });
-                $("<li>").html(" ").appendTo(tweet_list);
+                $("<li>").html(" ").appendTo(tweet_list); // mark the separation between responses
                console.log("load_tweets <- " + tweets.length);
             });
         } 
  
+    </script>
+
+</head>
+ 
+<body>
+ 
+    <form name='form1' class="well">
+        <label>Username</label>
+        <input id='username' name='username' type="text" class="span3" placeholder="Twitter username">
+        <button id='button1' type="button" class="btn" onClick='load_tweets()' >Get tweets</button>
+        <div id='response'></div>
+    </form>
+
+
+    Here are your tweets...
+    
+    <ul id="tweets"></ul>
+    <script type="text/javascript">
+        var tweet_list = $("#tweets"); // looks like var must be defined after the ul 'tweets'
+ 
+ 
         // Request tweets every five seconds
         //setInterval(load_tweets, 5000);
-        setInterval(load_tweets, 10000);
-        //setInterval(load_tweets, 20000);
-        </script>
-  </body>
+
+    </script>
+</body>
 </html>

@@ -1,13 +1,12 @@
 // from http://www.fusioncube.net/index.php/node-js-basics-and-twitter-search
 
-// Include all Node modules needed for this example
+// require Node modules
 var http = require("http"),
 	url=require("url"),
 	path=require("path"),
 	fs=require("fs"),
 	events=require("events"),
-	//sys = require("sys");
-	sys = require("util");
+	util = require("util");
 	
 /**
  * Handle the serving of files with static content
@@ -109,6 +108,7 @@ function get_tweets(query) {
 				if (tweets.length > 0) {
 				    
 				    // got some tweets
+			         console.log('got some tweets, tweets.length=', tweets.length);
 				    
 				    var newest_id = tweets[0]['id'];
 				    var oldest_id = tweets[tweets.length -1]['id'];
@@ -121,14 +121,15 @@ function get_tweets(query) {
 				        
 				        // remember the id
     					Twitter.oldest_id = oldest_id;
-    
+ 			    console.log('broadcast ');
+   
     					// broadcast the event 'tweets' to listeners if any
     					Twitter.EventEmitter.emit("tweets", tweets);
 				    }
 				}
 				
 				// remove any previous listeners
-				Twitter.EventEmitter.removeAllListeners("tweets");
+				//Twitter.EventEmitter.removeAllListeners("tweets");
 			} 
 			catch (ex) {
 				console.log("get_tweets: bad JSON data: " + body);
@@ -150,10 +151,13 @@ http.createServer(function (request, response) {
 	// Parse the entire URI to get just the pathname
 	var uri = url.parse(request.url).pathname;
 	
+	//console.log('createServer ' + util.inspect(request));
 	console.log('createServer ' + uri);
+	console.log('query ' + request.url.split("?")[1]);
+
 	
-	// If the user is requesting the Twitter search feature
 	if (uri === "/twitter") {
+	    // user is requesting tweets
   
         // if no response within timeout: return empty JSON array
         var timeout = setTimeout(function() {  
@@ -165,6 +169,8 @@ http.createServer(function (request, response) {
 	    // Register a listener for the 'tweets' event on the Twitter.EventEmitter.
 	    // This event is fired in get_tweets() when new tweets are found and parsed. 
 		Twitter.EventEmitter.once("tweets", function(tweets){
+		  	//console.log('createServer function(tweets)' + util.inspect(tweets));
+
             // Send a 200 header and the tweets structure back to the client
 			response.writeHead(200, {
 				"Content-Type": "text/plain"
