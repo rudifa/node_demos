@@ -21,13 +21,13 @@ function load_static_web_file(uri, response) {
     }
 	var filename = path.join(process.cwd(), uri);
 	
-	//console.log("load_static_web_file =" + uri + "=");
+	console.log("load_static_web_file =" + uri + "=");
 	//console.log("load_static_web_file " + filename);
     
 	// If path.exists function takes a string parameter - which is a path to
 	// the document being requested - and a function which gets passed a boolean
 	// argument which is true if a file at the path exists, and false if it doesn't
-	path.exists(filename, function(exists) {
+	fs.exists(filename, function(exists) {
 		
 		// File not found. Return a 404 error.
         if (!exists) {
@@ -95,16 +95,20 @@ function get_tweets(query) {
 	 */
 	.on("response", function(response){
 		var body = "";
-		
+	
+		response.on("data", function(data){
+            body += data;
+			console.log('data : body.length=', body.length);
+		});
+	
+		response.on("end", function(data){
+			console.log('end : body.length=', body.length);
+
 		/*
 		 * Now as the the response starts to get chunks of data streaming in
 		 * it will broadcast the data() event, which we will listen to. When
 		 * we receive data, append it to a body variable. 
 		 */
-		response.on("data", function(data){
-			body += data;
-			
-			//console.log('body=', body);
 			
 			try {
 				/*
@@ -115,8 +119,8 @@ function get_tweets(query) {
 				 */
 				var tweets = JSON.parse(body);
 				
-			    console.log('tweets=', tweets);
-			    //console.log('tweets.length=', tweets.length);
+			    //console.log('tweets=', tweets);
+			    console.log('tweets.length=', tweets.length);
 				
 				/*
 				 * The data was successfully parsed, so we can safely assume we 
@@ -165,7 +169,7 @@ function get_tweets(query) {
 }
 
 /**
- * Create an HTTP server listening on port 8124
+ * Create an HTTP server listening on port 8888
  * 
  * @param {Object} request
  * @param {Object} response
@@ -174,8 +178,10 @@ http.createServer(function (request, response) {
 	// Parse the entire URI to get just the pathname
 	var uri = url.parse(request.url).pathname, query;
 	
+	console.log('createServer ' + uri);
+	
 	// If the user is requesting the Twitter search feature
-	if(uri === "/twitter") {
+	if (uri === "/twitter") {
   
         /*
          * On each request, if it takes longer than 20 seconds, end the response 
