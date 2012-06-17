@@ -67,10 +67,8 @@ var Twitter = (function(){
  * 
  * @param {Object} query
  */
-function get_tweets(query) {
-	
-	var username = 'rudifa';
-	
+function get_tweets(username) {
+		
 	var options = {
 		host: "api.twitter.com",
 		port: 80,
@@ -152,8 +150,8 @@ http.createServer(function (request, response) {
 	var uri = url.parse(request.url).pathname;
 	
 	//console.log('createServer ' + util.inspect(request));
-	console.log('createServer ' + uri);
-	console.log('query ' + request.url.split("?")[1]);
+	console.log('createServer cb uri:' + uri);
+	console.log('createServer cb query:' + request.url.split("?")[1]);
 
 	
 	if (uri === "/twitter") {
@@ -183,10 +181,10 @@ http.createServer(function (request, response) {
 		});
 
         // Parse out the search term
-        var query = request.url.split("?")[1];
+        var username = request.url.split("?")[1];
 		
         // Search for tweets with the search term
-        get_tweets(query);
+        get_tweets(username);
 	
 	/*
 	 * For all other requests, try to return a static page by calling the 
