@@ -29,9 +29,10 @@
             //var keyword = "javascript";
             $.getJSON("/twitter?" + keyword, function(tweets) {
                 $.each(tweets, function() {
-                    $("<li>").html(this.id + "  " + this.text).appendTo(tweet_list);
+                    $("<li>").html(this.id + " " + this.text).appendTo(tweet_list);
                 });
-                console.log("load_tweets <- " + tweets.length);
+                $("<li>").html(" ").appendTo(tweet_list);
+               console.log("load_tweets <- " + tweets.length);
             });
         } 
  

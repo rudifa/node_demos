@@ -58,8 +58,8 @@ var Twitter = (function(){
     var eventEmitter = new events.EventEmitter();
 	
     return {
-        EventEmitter : eventEmitter,  // The event broadcaster
-        latestTweet : 0               // The ID of the latest searched tweet		
+        EventEmitter : eventEmitter,    // The event broadcaster
+        oldest_id : 0                   // The ID of the oldest tweet received so far	
     };
 })();
 
@@ -78,6 +78,9 @@ function get_tweets(query) {
 		method: "GET",
 		path: "/1/statuses/user_timeline.json?screen_name=" + username + "&count=5"		
 	};
+	if (Twitter.oldest_id > 0) {
+	   options.path += "&max_id=" + Twitter.oldest_id;
+	}
 	
 	console.log("get_tweets: " + options.host + options.path);
 	
@@ -91,7 +94,7 @@ function get_tweets(query) {
 		response.on("data", function(data) {
             // append data received from Twitter
             body += data;
-			console.log('data : body.length=', body.length);
+			//console.log('data : body.length=', body.length);
 		});
 	
 		response.on("end", function(data) {
@@ -106,11 +109,18 @@ function get_tweets(query) {
 				if (tweets.length > 0) {
 				    
 				    // got some tweets
-				    var latestTweet = tweets[0]['id'];
-				    if (Twitter.latestTweet < latestTweet) {
+				    
+				    var newest_id = tweets[0]['id'];
+				    var oldest_id = tweets[tweets.length -1]['id'];
+				    
+				    if (newest_id == Twitter.oldest_id) {
+				        // remove it to avoid repetition
+				        tweets.shift();
+				    }
+				    if (tweets.length > 0) {
 				        
 				        // remember the id
-    					Twitter.latestTweet = latestTweet;
+    					Twitter.oldest_id = oldest_id;
     
     					// broadcast the event 'tweets' to listeners if any
     					Twitter.EventEmitter.emit("tweets", tweets);
