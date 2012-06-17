@@ -1,4 +1,5 @@
-// from http://www.fusioncube.net/index.php/node-js-basics-and-twitter-search
+// morphed from http://www.fusioncube.net/index.php/node-js-basics-and-twitter-search
+// by @rudifa
 
 // require Node modules
 var http = require("http"),
@@ -9,19 +10,19 @@ var http = require("http"),
 	util = require("util");
 	
 /**
- * Handle the serving of files with static content
+ * Serve a static web file
  * 
  * @param {Object} uri
  * @param {Object} response
  */
-function load_static_web_file(uri, response) {
+function serve_static_web_file(uri, response) {
     if (uri == '/') {
         uri = '/index.html';
     }
 	var filename = path.join(process.cwd(), uri);
 	
-	console.log("load_static_web_file: " + uri);
-	//console.log("load_static_web_file " + filename);
+	console.log("serve_static_web_file: " + uri);
+	//console.log("serve_static_web_file " + filename);
     
 	// If file exists send it to the client
 	fs.exists(filename, function(exists) {
@@ -53,21 +54,22 @@ function load_static_web_file(uri, response) {
     });
 }
 
+// Server state and event emitter
 var Twitter = (function(){
     var eventEmitter = new events.EventEmitter();
 	
     return {
-        EventEmitter : eventEmitter,    // The event broadcaster
+        EventEmitter : eventEmitter,
         oldest_id : 0                   // The ID of the oldest tweet received so far	
     };
 })();
 
 /**
- * Get tweets for user
+ * Get tweets for username
  * 
  * @param {Object} query
  */
-function get_tweets(username) {
+function get_tweets_from_twitter(username) {
 		
 	var options = {
 		host: "api.twitter.com",
@@ -79,7 +81,7 @@ function get_tweets(username) {
 	   options.path += "&max_id=" + Twitter.oldest_id;
 	}
 	
-	console.log("get_tweets: " + options.host + options.path);
+	console.log("get_tweets_from_twitter: " + options.host + options.path);
 	
 	// Send a request to Twitter
 	var request = http.request(options)
@@ -130,7 +132,7 @@ function get_tweets(username) {
 				//Twitter.EventEmitter.removeAllListeners("tweets");
 			} 
 			catch (ex) {
-				console.log("get_tweets: bad JSON data: " + body);
+				console.log("get_tweets_from_twitter: bad JSON data: " + body);
 			}
 		});
 	});
@@ -140,7 +142,7 @@ function get_tweets(username) {
 }
 
 /**
- * Create an HTTP server listening on port 8888
+ * Create a HTTP server listening on port 8888
  * 
  * @param {Object} request
  * @param {Object} response
@@ -164,12 +166,11 @@ http.createServer(function (request, response) {
             response.end();  
         }, 5000);
 	
-	    // Register a listener for the 'tweets' event on the Twitter.EventEmitter.
-	    // This event is fired in get_tweets() when new tweets are found and parsed. 
+	    // Register a listener for the 'tweets' (emitted in get_tweets_from_twitter() when tweets are received). 
 		Twitter.EventEmitter.once("tweets", function(tweets){
 		  	//console.log('createServer function(tweets)' + util.inspect(tweets));
 
-            // Send a 200 header and the tweets structure back to the client
+            // Send the tweets json string back to the client
 			response.writeHead(200, {
 				"Content-Type": "text/plain"
 			});
@@ -177,21 +178,21 @@ http.createServer(function (request, response) {
 			response.end();
 			
 			// Stop the timeout function from completing (see below)
-			clearTimeout(timeout);
+			//clearTimeout(timeout);
 		});
 
-        // Parse out the search term
+        // Parse out the username
         var username = request.url.split("?")[1];
 		
         // Search for tweets with the search term
-        get_tweets(username);
+        get_tweets_from_twitter(username);
 	
 	/*
 	 * For all other requests, try to return a static page by calling the 
-	 * load_static_web_file() function.
+	 * serve_static_web_file() function.
 	 */ 
     } else {  
-        load_static_web_file(uri, response);  
+        serve_static_web_file(uri, response);  
     }
 }).listen(8888);
 

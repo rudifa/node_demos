@@ -21,7 +21,7 @@
     </style>
     <script type="text/javascript">
         //var tweet_list = $("#tweets"); 
- 
+        var current_username = '';
         function load_tweets() {
             // get value from form
             var username = document.forms['form1']['username'].value;
@@ -29,7 +29,11 @@
                 alert('Please enter a twitter username');
             }
             else {
-                console.log("load_tweets ->");
+                if (current_username != username) {
+                    current_username = username;
+                    $("#tweets").empty();
+                }
+                 console.log("load_tweets -> " + username);
                  $.getJSON("/twitter?" + username, function(tweets) {
                     $.each(tweets, function() {
                         $("<li>").html(this.user.name + " " + this.id + " " + this.text).appendTo(tweet_list);
