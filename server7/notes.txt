@@ -17,3 +17,84 @@ since_id=0 did not seem to work even in the browser
 Could get latest N tweets, then work backwards using max_id
 
 Should accumulate tweets in the server
+
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=3
+
+[{"created_at":"Sat Jun 16 11:27:58 +0000 2012","id":213956077430116353,"id_str":"213956077430116353","text":"Difficile de supporter qqn avec qui l'on ne peur pas communiquer, difficile de communiquer avec qqn qui l'on ne peut pas supporter","source":"web","truncated":false,"in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":36797542,"id_str":"36797542","name":"Rudi Farkas","screen_name":"rudifa","location":"Geneva","description":"Wrote firmware for world-class osciloscopes for many years. Loves skiing. Age : 74. His first iPhone app is in the AppStore : Cubz!","url":"http:\/\/playcubz.com\/","protected":false,"followers_count":184,"friends_count":190,"listed_count":14,"created_at":"Thu Apr 30 22:42:35 +0000 2009","favourites_count":0,"utc_offset":3600,"time_zone":"Bern","geo_enabled":false,"verified":false,"statuses_count":396,"lang":"en","contributors_enabled":false,"is_translator":false,"profile_background_color":"9AE4E8","profile_background_image_url":"http:\/\/a0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_image_url_https":"https:\/\/si0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_tile":false,"profile_image_url":"http:\/\/a0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_image_url_https":"https:\/\/si0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_link_color":"0084B4","profile_sidebar_border_color":"BDDCAD","profile_sidebar_fill_color":"DDFFCC","profile_text_color":"333333","profile_use_background_image":true,"show_all_inline_media":false,"default_profile":false,"default_profile_image":false,"following":null,"follow_request_sent":null,"notifications":null},"geo":null,"coordinates":null,"place":null,"contributors":null,"retweet_count":0,"favorited":false,"retweeted":false},
+ {"created_at":"Thu May 31 21:54:57 +0000 2012","id":208315654707744768,"id_str":"208315654707744768","text":"just updated my age in the twitter profile, could this be automated?","source":"web","truncated":false,"in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":36797542,"id_str":"36797542","name":"Rudi Farkas","screen_name":"rudifa","location":"Geneva","description":"Wrote firmware for world-class osciloscopes for many years. Loves skiing. Age : 74. His first iPhone app is in the AppStore : Cubz!","url":"http:\/\/playcubz.com\/","protected":false,"followers_count":184,"friends_count":190,"listed_count":14,"created_at":"Thu Apr 30 22:42:35 +0000 2009","favourites_count":0,"utc_offset":3600,"time_zone":"Bern","geo_enabled":false,"verified":false,"statuses_count":396,"lang":"en","contributors_enabled":false,"is_translator":false,"profile_background_color":"9AE4E8","profile_background_image_url":"http:\/\/a0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_image_url_https":"https:\/\/si0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_tile":false,"profile_image_url":"http:\/\/a0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_image_url_https":"https:\/\/si0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_link_color":"0084B4","profile_sidebar_border_color":"BDDCAD","profile_sidebar_fill_color":"DDFFCC","profile_text_color":"333333","profile_use_background_image":true,"show_all_inline_media":false,"default_profile":false,"default_profile_image":false,"following":null,"follow_request_sent":null,"notifications":null},"geo":null,"coordinates":null,"place":null,"contributors":null,"retweet_count":1,"favorited":false,"retweeted":false},
+ {"created_at":"Sun May 06 10:16:48 +0000 2012","id":199080261282045953,"id_str":"199080261282045953","text":"Edible fractal! http:\/\/t.co\/vicyE2hh","source":"\u003ca href=\"http:\/\/www.apple.com\" rel=\"nofollow\"\u003ePhotos on iOS\u003c\/a\u003e","truncated":false,"in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":36797542,"id_str":"36797542","name":"Rudi Farkas","screen_name":"rudifa","location":"Geneva","description":"Wrote firmware for world-class osciloscopes for many years. Loves skiing. Age : 74. His first iPhone app is in the AppStore : Cubz!","url":"http:\/\/playcubz.com\/","protected":false,"followers_count":184,"friends_count":190,"listed_count":14,"created_at":"Thu Apr 30 22:42:35 +0000 2009","favourites_count":0,"utc_offset":3600,"time_zone":"Bern","geo_enabled":false,"verified":false,"statuses_count":396,"lang":"en","contributors_enabled":false,"is_translator":false,"profile_background_color":"9AE4E8","profile_background_image_url":"http:\/\/a0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_image_url_https":"https:\/\/si0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_tile":false,"profile_image_url":"http:\/\/a0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_image_url_https":"https:\/\/si0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_link_color":"0084B4","profile_sidebar_border_color":"BDDCAD","profile_sidebar_fill_color":"DDFFCC","profile_text_color":"333333","profile_use_background_image":true,"show_all_inline_media":false,"default_profile":false,"default_profile_image":false,"following":null,"follow_request_sent":null,"notifications":null},"geo":null,"coordinates":null,"place":null,"contributors":null,"retweet_count":0,"favorited":false,"retweeted":false,"possibly_sensitive":false}
+]
+
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=1&since_id=199080261282045953
+
+[{"created_at":"Sat Jun 16 11:27:58 +0000 2012","id":213956077430116353,"id_str":"213956077430116353","text":"Difficile de supporter qqn avec qui l'on ne peur pas communiquer, difficile de communiquer avec qqn qui l'on ne peut pas supporter","source":"web","truncated":false,"in_reply_to_status_id":null,"in_reply_to_status_id_str":null,"in_reply_to_user_id":null,"in_reply_to_user_id_str":null,"in_reply_to_screen_name":null,"user":{"id":36797542,"id_str":"36797542","name":"Rudi Farkas","screen_name":"rudifa","location":"Geneva","description":"Wrote firmware for world-class osciloscopes for many years. Loves skiing. Age : 74. His first iPhone app is in the AppStore : Cubz!","url":"http:\/\/playcubz.com\/","protected":false,"followers_count":184,"friends_count":190,"listed_count":14,"created_at":"Thu Apr 30 22:42:35 +0000 2009","favourites_count":0,"utc_offset":3600,"time_zone":"Bern","geo_enabled":false,"verified":false,"statuses_count":396,"lang":"en","contributors_enabled":false,"is_translator":false,"profile_background_color":"9AE4E8","profile_background_image_url":"http:\/\/a0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_image_url_https":"https:\/\/si0.twimg.com\/profile_background_images\/17762518\/DSC01211-63-2.jpeg","profile_background_tile":false,"profile_image_url":"http:\/\/a0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_image_url_https":"https:\/\/si0.twimg.com\/profile_images\/311858510\/me-bsp-6a_normal.png","profile_link_color":"0084B4","profile_sidebar_border_color":"BDDCAD","profile_sidebar_fill_color":"DDFFCC","profile_text_color":"333333","profile_use_background_image":true,"show_all_inline_media":false,"default_profile":false,"default_profile_image":false,"following":null,"follow_request_sent":null,"notifications":null},"geo":null,"coordinates":null,"place":null,"contributors":null,"retweet_count":0,"favorited":false,"retweeted":false}]
+
+since_id : no effect ?! yes.
+
+
+Issue #256: since_id has no effect on /statuses/user_timeline.json
+
+    Calling
+    
+    http://api.twitter.com/1/statuses/user_timeline.json?since_id=174557295609511937&user_id=296685367&count=5
+    
+    and
+    
+    http://api.twitter.com/1/statuses/user_timeline.json?user_id=296685367&count=5
+    
+    return the exact same results. I would expect using since_id to return 5 tweets directly following tweet 174557295609511937.
+    
+    Am I interpreting this wrongly?
+    
+    Updates
+    
+        Yes, since_id caps the bottom of the list, not the top. So if there have been more than 5 tweets since 174....1937, 
+        I would expect them to return the same results. We're working on documentation to make this more clear.
+
+========
+
+since_id optional
+
+Returns results with an ID greater than (that is, more recent than) the specified ID. 
+
+// combined with count=, returns count most recent ids, starting with the most recent, and not including the id specified
+
+
+========
+    
+max_id : Returns results with an ID less than (that is, older than) or equal to the specified ID
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=3&max_id=199080261282045953
+
+That works, we can work backwards from the most recent tweets;
+we must drop the most recent one (#0) in tweets with max_id
+
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=1&max_id=0
+
+[]
+
+Makes sense.
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=3&max_id=199080261282045953
+
+Works, but sometimes max_id tweet is included in the results, sometimes not
+Should test for it and drop if repeated
+
+
+========
+
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=1&since_id=0
+{"request":"\/1\/statuses\/user_timeline.json?screen_name=rudifa&count=1&since_id=0","error":"Error in 'since_id' parameter: invalid id."}
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=1&since_id=1
+
+returns the most recent id
+
+http://api.twitter.com/1/statuses/user_timeline.json?screen_name=rudifa&count=1&since_id=199080261282045953
+
+
+

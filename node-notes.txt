@@ -1,3 +1,7 @@
 
 Learning Server-Side JavaScript with Node.js
 http://net.tutsplus.com/tutorials/javascript-ajax/learning-serverside-javascript-with-node-js/
+
+
+http.request() returns an instance of the http.ClientRequest class. The ClientRequest instance is a writable stream. 
+
