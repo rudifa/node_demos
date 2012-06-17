@@ -59,8 +59,9 @@ var Twitter = (function(){
     var eventEmitter = new events.EventEmitter();
 	
     return {
-        EventEmitter : eventEmitter,
-        oldest_id : 0                   // The ID of the oldest tweet received so far	
+        EventEmitter: eventEmitter,
+        oldest_id: 0,                   // The ID of the oldest tweet received so far
+        current_user: ''
     };
 })();
 
@@ -183,6 +184,11 @@ http.createServer(function (request, response) {
 
         // Parse out the username
         var username = request.url.split("?")[1];
+        
+        if (Twitter.current_user != username) {
+            Twitter.current_user = username;
+            Twitter.oldest_id = 0;
+        }
 		
         // Search for tweets with the search term
         get_tweets_from_twitter(username);
