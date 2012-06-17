@@ -1,5 +1,5 @@
 // http://net.tutsplus.com/tutorials/javascript-ajax/learning-serverside-javascript-with-node-js/
-// updated 0.6.19 names
+// updated to 0.6.19
 
 var util = require("util"),
     http = require("http");
