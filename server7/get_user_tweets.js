@@ -79,6 +79,8 @@ function get_tweets(query) {
 		path: "/1/statuses/user_timeline.json?screen_name=" + username + "&count=5"		
 	};
 	
+	console.log("get_tweets: " + options.host + options.path);
+	
 	// Send a request to Twitter
 	var request = http.request(options)
 	
@@ -123,7 +125,6 @@ function get_tweets(query) {
 			}
 		});
 	});
-	console.log("..." + options.host + options.path);
 
 	// End the request
 	request.end();
@@ -137,29 +138,22 @@ function get_tweets(query) {
  */
 http.createServer(function (request, response) {
 	// Parse the entire URI to get just the pathname
-	var uri = url.parse(request.url).pathname, query;
+	var uri = url.parse(request.url).pathname;
 	
 	console.log('createServer ' + uri);
 	
 	// If the user is requesting the Twitter search feature
 	if (uri === "/twitter") {
   
-        /*
-         * On each request, if it takes longer than 20 seconds, end the response 
-         * and send back an empty structure.
-         */
+        // if no response within timeout: return empty JSON array
         var timeout = setTimeout(function() {  
             response.writeHead(200, { "Content-Type" : "text/plain" });  
             response.write(JSON.stringify([]));  
             response.end();  
-       // }, 20000);
         }, 5000);
 	
-	    /*
-	     * Register a listener for the 'tweets' event on the Twitter.EventEmitter.
-	     * This event is fired when new tweets are found and parsed. 
-	     *      (see get_tweets() method above) 
-	     */
+	    // Register a listener for the 'tweets' event on the Twitter.EventEmitter.
+	    // This event is fired in get_tweets() when new tweets are found and parsed. 
 		Twitter.EventEmitter.once("tweets", function(tweets){
             // Send a 200 header and the tweets structure back to the client
 			response.writeHead(200, {
@@ -173,7 +167,7 @@ http.createServer(function (request, response) {
 		});
 
         // Parse out the search term
-        query = request.url.split("?")[1];
+        var query = request.url.split("?")[1];
 		
         // Search for tweets with the search term
         get_tweets(query);
