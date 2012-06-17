@@ -21,7 +21,7 @@ function load_static_web_file(uri, response) {
     }
 	var filename = path.join(process.cwd(), uri);
 	
-	console.log("load_static_web_file =" + uri + "=");
+	console.log("load_static_web_file: " + uri);
 	//console.log("load_static_web_file " + filename);
     
 	// If file exists send it to the client
@@ -64,94 +64,62 @@ var Twitter = (function(){
 })();
 
 /**
- * Pings the Twitter Search API with the specified query term
+ * Get tweets for user
  * 
  * @param {Object} query
  */
 function get_tweets(query) {
-		
+	
+	var username = 'rudifa';
+	
 	var options = {
 		host: "api.twitter.com",
 		port: 80,
 		method: "GET",
-		//path: "/1/statuses/user_timeline.json?screen_name=rudifa&count=3" + "&since_id=" + Twitter.latestTweet // not working
-		path: "/1/statuses/user_timeline.json?screen_name=rudifa&count=5"		
+		path: "/1/statuses/user_timeline.json?screen_name=" + username + "&count=5"		
 	};
 	
-	// Send a search request to Twitter
+	// Send a request to Twitter
 	var request = http.request(options)
 	
-	/* 
-	 * When an http request responds, it broadcasts the response() event, 
-	 * so let's listen to it here. Now, this is just a simple 'Hey, I got 
-	 * a response' event, it doesn't contain the data of the response.
-	 */
+	// register listener for event 'response'
 	.on("response", function(response){
 		var body = "";
 	
-		response.on("data", function(data){
+		response.on("data", function(data) {
+            // append data received from Twitter
             body += data;
 			console.log('data : body.length=', body.length);
 		});
 	
-		response.on("end", function(data){
+		response.on("end", function(data) {
 			console.log('end : body.length=', body.length);
-
-		/*
-		 * Now as the the response starts to get chunks of data streaming in
-		 * it will broadcast the data() event, which we will listen to. When
-		 * we receive data, append it to a body variable. 
-		 */
 			
 			try {
-				/*
-				 * Since the Twitter Search API is streaming, we can't listen to 
-				 * the end() method, so I've got some logic where we try to parse
-				 * the data we have so far. If it can't be parsed, then the 
-				 * response isn't complete yet.
-				 */
+				// parse the response data
 				var tweets = JSON.parse(body);
 				
-			    //console.log('tweets=', tweets);
 			    console.log('tweets.length=', tweets.length);
 				
-				/*
-				 * The data was successfully parsed, so we can safely assume we 
-				 * have a valid structure.
-				 */
 				if (tweets.length > 0) {
+				    
+				    // got some tweets
 				    var latestTweet = tweets[0]['id'];
 				    if (Twitter.latestTweet < latestTweet) {
-    					/*
-    					 * We actually got some tweets, so set the Twitter.latestTweet 
-    					 * value to the ID of the latest one in the collection.
-    					 */ 
+				        
+				        // remember the id
     					Twitter.latestTweet = latestTweet;
     
-    					/*
-    					 * Remember, node.js is an event based framework, so in order 
-    					 * to get the tweets back to the client, we need to broadcast 
-    					 * a custom event named 'tweets'. There's a function listening 
-    					 * for this event in the createServer() function (see below).
-    					 */ 
+    					// broadcast the event 'tweets' to listeners if any
     					Twitter.EventEmitter.emit("tweets", tweets);
 				    }
 				}
 				
-				/*
-				 * I'm clearing all object listening for the 'tweets' event here to 
-				 * clean up any listeners created on previous requests that did not 
-				 * find any tweets.
-				 */
+				// remove any previous listeners
 				Twitter.EventEmitter.removeAllListeners("tweets");
 			} 
 			catch (ex) {
-				/*
-				 * If we get here, it's because we received data from the request, 
-				 * but it's not a valid JSON struct yet that can be parsed into an 
-				 * Object.
-				 */
-				console.log("waiting for more data chunks...");
+				console.log("get_tweets: bad JSON data: " + body);
 			}
 		});
 	});
