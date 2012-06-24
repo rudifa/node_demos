@@ -5,3 +5,8 @@ http://net.tutsplus.com/tutorials/javascript-ajax/learning-serverside-javascript
 
 http.request() returns an instance of the http.ClientRequest class. The ClientRequest instance is a writable stream. 
 
+
+avelino-example-nodejs-mongodb-e86ac97 : works - a very minimal connection to mongodb via mongoose 
+
+express-mongodb - fails, can't find stylus
+
