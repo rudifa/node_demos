@@ -33,16 +33,21 @@
                     current_username = username;
                     $("#tweets").empty();
                 }
-                 console.log("load_tweets -> " + username);
-                 $.getJSON("/twitter?" + username, function(tweets) {
+                console.log("load_tweets -> " + username);
+                $.getJSON("/twitter?" + username, function(tweets) {
                     $.each(tweets, function() {
                         $("<li>").html(this.user.name + " " + this.id + " " + this.text).appendTo(tweet_list);
                     });
                     $("<li>").html(" ").appendTo(tweet_list); // mark the separation between responses
-                   console.log("load_tweets <- " + tweets.length);
+                    console.log("load_tweets <- " + tweets.length);
+                    scrollToBottom();
                 });
             }
-        } 
+        }
+        function scrollToBottom() {
+            //alert("Scrolling to bottom ...");
+            window.scrollTo(0, document.body.scrollHeight);
+        }
  
     </script>
 
@@ -54,6 +59,7 @@
         <label>Username</label>
         <input id='username' name='username' type="text" class="span3" placeholder="Twitter username">
         <button id='button1' type="button" class="btn" onClick='load_tweets()' >Get tweets</button>
+<!-- -->
         <div id='response'></div>
     </form>
 
@@ -63,11 +69,13 @@
     <ul id="tweets"></ul>
     <script type="text/javascript">
         var tweet_list = $("#tweets"); // looks like var must be defined after the ul 'tweets'
- 
- 
-        // Request tweets every five seconds
-        //setInterval(load_tweets, 5000);
-
     </script>
+ 
+ 
+    <form name='form2' class="well">
+        <button id='button2' type="button" class="btn" onClick='load_tweets()' >Get more tweets</button>
+        <div id='response'></div>
+    </form>
+
 </body>
 </html>
