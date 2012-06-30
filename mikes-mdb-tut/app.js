@@ -31,6 +31,20 @@
         });
     });
 
+    app.get('/removeuser/:username', function(req, res){
+        Person.findOne({username: req.params.username}, function(error, person){
+            if(error){
+                res.json(error);
+                console.log('error ' + error);
+            }
+            else {
+                console.log('person ' + person);
+                res.json(person);
+            }
+            
+         }).remove(); // removes all matching documents
+    });
+
     app.get('/adduser/:first/:last/:username', function(req, res){
         var person_data = {
             first_name: req.params.first
@@ -38,12 +52,11 @@
           , username: req.params.username
         };
         
-        Person.findOne(person_data, function(error, person){
+        Person.findOne({username: req.params.username}, function(error, person){
             if(error){
                 res.json(error);
             }
             else if(person == null){
-                //res.json('no such user yet!')
                 var person = new Person(person_data);
 
                 person.save( function(error, data){
@@ -51,12 +64,12 @@
                         res.json(error);
                     }
                     else{
-                        res.json(data);
+                        res.json({'new user': data});
                     }
                 });
             }
             else{
-                res.json(person);
+                res.json({'current user': person});
             }
         });
     });
