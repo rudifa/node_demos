@@ -8,12 +8,19 @@ Initially from http://psitsmike.com/2012/02/node-js-and-mongo-using-mongoose-tut
 Let’s start the server:
 
 node app.js
-And add a single document by going to the url:
 
-localhost:3001/adduser/michael/mukhin/mmukhin
+And add a single document by going to the url '/adduser/:first/:last/:username':
+
+  localhost:3001/adduser/michael/mukhin/mmukhin
+
 To view all documents, go to:
 
-localhost:3001/
+  localhost:3001/
+
 And to add hobbies to any user:
 
-localhost:3001/addhobby/mmukhin/beer
+  localhost:3001/addhobby/mmukhin/beer
+
+To remove user by the username
+
+  localhost:3001/removeuser/mmukhin
