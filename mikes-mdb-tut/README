@@ -4,3 +4,16 @@ npm install mongoose
 node app.js
 
 Initially from http://psitsmike.com/2012/02/node-js-and-mongo-using-mongoose-tutorial/
+
+Let’s start the server:
+
+node app.js
+And add a single document by going to the url:
+
+localhost:3001/adduser/michael/mukhin/mmukhin
+To view all documents, go to:
+
+localhost:3001/
+And to add hobbies to any user:
+
+localhost:3001/addhobby/mmukhin/beer
