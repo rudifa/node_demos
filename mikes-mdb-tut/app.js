@@ -37,15 +37,26 @@
           , last_name: req.params.last
           , username: req.params.username
         };
-
-        var person = new Person(person_data);
-
-        person.save( function(error, data){
+        
+        Person.findOne(person_data, function(error, person){
             if(error){
                 res.json(error);
             }
+            else if(person == null){
+                //res.json('no such user yet!')
+                var person = new Person(person_data);
+
+                person.save( function(error, data){
+                    if(error){
+                        res.json(error);
+                    }
+                    else{
+                        res.json(data);
+                    }
+                });
+            }
             else{
-                res.json(data);
+                res.json(person);
             }
         });
     });
