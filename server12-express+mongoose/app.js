@@ -37,16 +37,24 @@ app.post('/', store.home_post_handler);
 
 // display the list of item
 app.get('/items', store.items);
+
 // show individual item
 app.get('/item/:id', store.item);
+
 // show general pages
 app.get('/page', store.page);
+
 app.get('/logout', function(req, res) {
     // delete the session variable
     delete req.session.username;
     // redirect user to homepage
     res.redirect('/');
 });
+
+// show users page
+app.get('/users', store.users);
+
+
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", 3000, app.settings.env);

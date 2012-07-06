@@ -12,6 +12,7 @@ exports.home_post_handler = function(req, res) {
 	username = req.body.username || 'Anonymous';
 	// store the username as a session variable
 	req.session.username = username;
+	users[username] = 1;
 	// redirect the user to homepage
 	res.redirect('/');
 };
@@ -23,6 +24,9 @@ var items = {
     CGI:{name:'Chigiriki', price:250},
     NGT:{name:'Naginata', price:900},
     KTN:{name:'Katana', price:1000}
+};
+
+var users = {
 };
 
 // handler for displaying the items
@@ -52,3 +56,16 @@ exports.page = function(req, res) {
     };
     res.render('page', { title: 'Ninja Store - ' + name, username: req.session.username, content:contents[name] });
 };
+
+// handler for showing list of users
+exports.users = function(req, res) {
+    var name = req.query.name;
+    var contents = {
+       about: 'Ninja Store sells the coolest ninja stuff in the world. Anyone shopping here is cool.',
+        contact: 'You can contact us at <address><strong>Ninja Store</strong>,<br>1, World Ninja Headquarters,<br>Ninja Avenue,<br>NIN80B7-JP,<br>Nihongo.</address>',
+		'users':users
+    };
+    res.render('users', { title: 'Ninja Store - ', username: req.session.username, content:contents[name] });
+};
+
+ 
