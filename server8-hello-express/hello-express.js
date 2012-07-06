@@ -3,7 +3,9 @@
 var express = require('express'),
     app = express.createServer();
     
-app.use(express.logger());
+app.use(express.logger()); // logs failed requests e.g. for favicon
+
+app.use(express.favicon(__dirname + '/favicon.ico', { maxAge: 2592000000 })); // OK
 
 var count = 0;
 
@@ -13,11 +15,13 @@ app.get('/', function(req, res) {
 });
 
 var port = 3000;    // the default port
-app.listen(port); 
+app.listen(3000, function(){
+  console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
 
-console.log('Express server started on port %s', port);
+});  
+
+//console.log('Express server started on port %s', port);
 
 //console.log(app); // ok
 //console.log(app.address()); // fails
 
-    
